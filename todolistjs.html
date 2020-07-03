@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Taral C.P.L</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap 4 css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="moment.js"></script>
+    <script type="text/javascript" src="moment1.js"></script>
+  
+    
+
+
+</head>
+<body id="body1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8" id="div">
+        </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+
+    <!--Script Starts--> 
+
+
+    <script>
+
+
+
+//validation
+
+
+let rIndex;
+        let arr=[];
+        let j;
+        let k=0;
+        let flag=0;
+        let chk = /^[A-Za-z]+$/;
+
+        function add()
+        {
+            
+            for(k=0;k<arr.length;k++)
+            {
+            if(document.getElementById("txt").value == arr[k])  //use to check the input is duplicate or not.
+            {
+                flag=1;
+            }
+            }
+            if(document.getElementById("txt").value.match(chk))//use to check the input is alphabet or not.
+            {
+
+            }
+            else{
+                if(document.getElementById("txt").value == "")//checking the input is null;
+            {
+                alert("invalid input");
+
+            }
+            else{
+                alert("Alphabets Text Only");
+            }
+                return false;
+            }
+            if(flag==1)
+            {
+                alert("text is already there");
+                flag=0;
+            }
+            else
+            {
+                var table=document.getElementById("table"); //inserting the input into the table.
+            var newRow=table.insertRow(table.length),
+            cell1=newRow.insertCell(0),
+            cell2=newRow.insertCell(1),
+            cell3=newRow.insertCell(2),
+            cell4=newRow.insertCell(3),
+            cell5=newRow.insertCell(4),
+            tin=document.getElementById("txt").value;
+
+            var i=arr.length;
+            var k=i+1;
+            cell1.innerHTML=k;
+            cell2.innerHTML=tin;
+            var l,n,o,p;
+            l=new Date();
+            n=l.toString();
+            p=n;
+            o=n.indexOf("G");
+           var res= p.slice(0,o);
+            cell3.innerHTML=res;
+
+            var button=document.createElement("BUTTON");
+            button.innerHTML="Done";
+            button.setAttribute("style","height:5%;width:90%;margin:5%;border-radius:5px;");
+            button.addEventListener("click",Done);
+            button.addEventListener("mouseover",function( Event)
+            {
+                event.target.style.backgroundColor="lightgreen";
+                event.target.style.color="white";
+            });
+            button.addEventListener("mouseout",function( Event)
+            {
+                event.target.style.backgroundColor="white";
+                event.target.style.color="black";
+            });
+
+            cell4.appendChild(button);
+
+            var button1=document.createElement("BUTTON");
+            button1.innerHTML="Remove";
+            button1.setAttribute("style","height:5%;width:90%;margin:5%;border-radius:5px;");
+            button1.addEventListener("mouseover",function( Event)
+            {
+                event.target.style.backgroundColor="lightgreen";
+                event.target.style.color="white";
+            });
+            button1.addEventListener("mouseout",function( Event)
+            {
+                event.target.style.backgroundColor="white";
+                event.target.style.color="black";
+            });
+
+            button1.addEventListener("click",popUp);
+            cell5.appendChild(button1);
+
+            arr.push(document.getElementById("txt").value);
+            localStorage.setItem(i+1,document.getElementById("txt").value);
+            document.getElementById("txt").value="";
+            }
+
+
+           
+            }
+            function popUp()  // use to open the modal.
+            {
+                
+                var table=document.getElementById("table");
+                for(var i=0 ; i < table.rows.length ; i++)
+                {
+              table.rows[i].cells[4].onclick=function()
+              {
+                
+                  rIndex= this.parentElement.rowIndex;
+              }
+                }
+                document.getElementById("mdiv").style.display="block";
+            }
+
+          
+            function removerow() // To remove the row.
+          {
+          
+             table.deleteRow(rIndex);
+            let r=rIndex;
+              arr.splice(r,1);
+
+         document.getElementById("txt").value="";
+         modalclose();
+         serialno();
+              
+          }
+
+
+
+          function serialno()
+          {
+            var table=document.getElementById("table");
+                for(var i=0 ; i < table.rows.length ; i++)
+                {
+
+                    table.rows[i].cells[0].innerHTML=i+1;
+                
+                }
+          }
+         
+          
+     
+
+          function Done() // use to strike-through.
+          { 
+            var table=document.getElementById("table");
+          
+          for(var i=0 ; i < table.rows.length ; i++)
+          {
+              table.rows[i].cells[3].onclick=function()
+              { rIndex= this.parentElement.rowIndex;
+                table.rows[rIndex].cells[0].setAttribute("style","text-decoration: line-through;");
+                table.rows[rIndex].cells[1].setAttribute("style","text-decoration: line-through;");
+                table.rows[rIndex].cells[2].setAttribute("style","text-decoration: line-through;");
+
+              }
+              document.getElementById("txt").value="";
+
+          }
+          
+          }
+
+
+
+
+//body
+
+
+
+
+
+
+        document.querySelector('body').style.backgroundImage="url('7.resized.jpeg')";
+
+        // creating division
+        let div=document.getElementById("div");
+        div.setAttribute("style","font-size:18px;margin-top:10%;width:90%;height:90%;color:white;font-family:Georgia, 'Times New Roman', Times, serif;padding-top:3%;")
+        
+        // creating paragraph.
+        var heading=document.createElement("p");
+        heading.innerHTML="EVENT MANAGER"+"<br>";
+        heading.style.fontSize='30px';
+        heading.style.textAlign='center';
+
+        var p=document.createElement("p");
+        p.innerHTML='Click <span style="color:rgb(100, 100, 219);">ADD</span> to Enter the Event into the table,'+"<br>";
+        p.style.textAlign='center';
+
+        var p1=document.createElement("p");
+        p1.innerHTML='Click <span style="color: rgb(100, 100, 219);">REMOVE</span> to Delete the Event from the table.';
+        p1.style.textAlign="center";
+        var txt=document.getElementById('txt');
+        div.append(p1);
+        div.insertBefore(p,p1);
+        div.insertBefore(heading,p);
+
+        //creating input text box.
+        var input=document.createElement("INPUT");
+        input.setAttribute("type","text");
+        input.setAttribute("placeholder","Enter");
+        input.setAttribute("id","txt");
+        input.setAttribute("style","display: flex;margin-top:3%;margin-left:15%;width:70%;border-radius:7px;");
+       
+          
+        
+        //creating button.
+        var button2=document.createElement("BUTTON");
+            button2.innerHTML="Add";
+            button2.setAttribute("style","height:25px;width:50px;margin-left:45%;margin-top:2%;border-radius:5px;");
+            button2.addEventListener("click",add);
+            button2.addEventListener("mouseover",function( Event)
+            {
+                event.target.style.backgroundColor="lightgray";
+            });
+            button2.addEventListener("mouseout",function( Event)
+            {
+                event.target.style.backgroundColor="white";
+                
+            });
+
+            //creating table.
+        var table=document.createElement("TABLE");
+        table.setAttribute("id","table");
+        table.setAttribute("border","2px");
+        table.setAttribute("style"," Margin-left:17%;margin-top:5%;width:70%;background-color:white;padding:5%;color:black;");
+        div.appendChild(input);
+        div.appendChild(button2);
+        div.appendChild(table);
+
+        //creating modal.
+        var mdiv=document.createElement("mdiv");
+        mdiv.setAttribute("id","mdiv");
+        mdiv.setAttribute("style","display: none;position: fixed; z-index: 1;padding-top: 100px; left: 0;top: 0;width: 100%; height: 100%; overflow: auto;background-color: rgba(0,0,0,0.4); ")
+        document.getElementById("body1").appendChild(mdiv);
+        var mpara=document.createElement("p");
+        mpara.innerHTML="DO YOU WANT TO DELETE";
+        mpara.setAttribute("style"," background-color:ghostwhite;margin: auto;color:rgb(255, 102, 102);font-size:large;padding:40px;border: 1px solid #888;width: 50%;");
+        mdiv.appendChild(mpara);
+        var mbtn=document.createElement("button");
+        mbtn.innerHTML="Delete";
+        mbtn.setAttribute("style","margin-left:10px;float:right;");
+        mbtn.addEventListener("mouseover",function( Event)
+            {
+                event.target.style.backgroundColor="rgb(255, 102, 102)";
+                event.target.style.color="white";
+            });
+            mbtn.addEventListener("mouseout",function( Event)
+            {
+                event.target.style.backgroundColor="white";
+                event.target.style.color="black";
+                
+            });
+
+        mbtn.addEventListener("click",removerow);
+        mpara.appendChild(mbtn);
+        var mbtn1=document.createElement("button");
+        mbtn1.innerHTML="Cancel";
+        mbtn1.setAttribute("style","float:right;");
+        mbtn1.addEventListener("mouseover",function( Event)
+            {
+                event.target.style.backgroundColor="rgb(255, 102, 102)";
+                event.target.style.color="white";
+            });
+            mbtn1.addEventListener("mouseout",function( Event)
+            {
+                event.target.style.backgroundColor="white";
+                event.target.style.color="black";
+                
+            });
+        mbtn1.addEventListener("click",modalclose);
+        mpara.appendChild(mbtn1);
+        
+        function modalclose()  // function is used to close the modal.
+        {
+            document.getElementById("mdiv").style.display="none";
+
+        }
+       
+
+
+        </script>
+
+
+
+
+</body>
+</html>
